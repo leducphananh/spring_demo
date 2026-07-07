@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,4 +30,18 @@ public class Product {
     private Double price;
 
     private Integer stock;
+
+    private Boolean active = true;
+
+    private String imageUrl;
+
+    private Double importPrice;
+
+    private String supplierName;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
+    private Boolean deleted;
 }

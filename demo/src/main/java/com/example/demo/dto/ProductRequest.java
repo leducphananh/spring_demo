@@ -9,4 +9,8 @@ public class ProductRequest {
     private Double price;
 
     private Integer stock;
+
+    private String imageUrl;
+
+    private Boolean active;
 }

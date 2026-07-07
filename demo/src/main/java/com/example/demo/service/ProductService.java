@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.ProductRequest;
+import com.example.demo.dto.ProductResponse;
 import com.example.demo.entity.Product;
 import com.example.demo.exception.ProductNotFoundException;
+import com.example.demo.mapper.ProductMapper;
 import com.example.demo.repository.ProductRepository;
 
 @Service
@@ -16,12 +19,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public ProductResponse createProduct(ProductRequest request) {
+        Product product = ProductMapper.toEntity(request);
+        Product savedProduct = productRepository.save(product);
+        return ProductMapper.toResponse(savedProduct);
     }
 
-    public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+    public ProductResponse getProductById(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        if (product == null) {
+            throw new ProductNotFoundException(id);
+        }
+        return ProductMapper.toResponse(product);
     }
 
     public List<Product> getAllProducts() {

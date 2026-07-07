@@ -19,7 +19,7 @@ Content-Type: application/json
 ###
 
 ### Get a product by ID
-GET {{baseUrl}}/products/6
+GET {{baseUrl}}/products/5
 Accept: application/json
 
 ###
