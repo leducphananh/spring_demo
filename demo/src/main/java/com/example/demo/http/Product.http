@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:8080
+
+### Get all products
+GET {{baseUrl}}/products
+Accept: application/json
+
+###
+
+### Create a new product
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Laptop Dell XPS",
+  "price": 1500.0,
+  "stock": 10
+}
+
+###
+
+### Get a product by ID
+GET {{baseUrl}}/products/6
+Accept: application/json
+
+###
+
+### Update a product
+PUT {{baseUrl}}/products/1
+Content-Type: application/json
+
+{
+  "name": "Laptop Dell XPS 15",
+  "price": 1600.0,
+  "stock": 15
+}
+
+###
+
+### Delete a product
+DELETE {{baseUrl}}/products/10
