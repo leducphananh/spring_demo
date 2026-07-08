@@ -43,4 +43,11 @@ public class GlobalExceptionHandler {
         log.error("Email already exists exception: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponseUtil.error(ex.getMessage(), null));
     }
+
+    @ExceptionHandler(InvalidEmailOrPasswordException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidEmailOrPasswordException(
+            InvalidEmailOrPasswordException ex) {
+        log.error("Invalid email or password exception: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseUtil.error(ex.getMessage(), null));
+    }
 }

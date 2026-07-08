@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.common.ApiResponse;
 import com.example.demo.common.ResponseUtil;
+import com.example.demo.dto.request.LoginRequest;
 import com.example.demo.dto.request.RegisterRequest;
+import com.example.demo.dto.response.LoginResponse;
 import com.example.demo.dto.response.RegisterResponse;
 import com.example.demo.service.AuthService;
 
@@ -30,4 +32,13 @@ public class AuthController {
                         "Register successfully"));
 
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<LoginResponse>> login(
+            @Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(
+                ResponseUtil.success(authService.login(request),
+                        "Login successfully"));
+    }
+
 }
