@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.ProductRequest;
 import com.example.demo.dto.ProductResponse;
 import com.example.demo.entity.Product;
-import com.example.demo.exception.ProductNotFoundException;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.ProductMapper;
 import com.example.demo.repository.ProductRepository;
 
@@ -28,7 +28,7 @@ public class ProductService {
     public ProductResponse getProductById(Long id) {
         Product product = productRepository.findById(id).orElse(null);
         if (product == null) {
-            throw new ProductNotFoundException(id);
+            throw new ResourceNotFoundException("Product", "id", id);
         }
         return ProductMapper.toResponse(product);
     }
