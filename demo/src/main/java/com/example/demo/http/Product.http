@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:8080
 
-### Get all products
-GET {{baseUrl}}/products
+### Get products (with optional search and pagination)
+GET {{baseUrl}}/products?page=0&size=5&keyword=iphone
 Accept: application/json
 
 ###
