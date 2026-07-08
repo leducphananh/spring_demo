@@ -30,7 +30,7 @@ PUT {{baseUrl}}/products/6
 Content-Type: application/json
 
 {
-  "name": "Laptop Dell XPS 15",
+  "name": "Laptop Dell XPS 12",
   "price": 1600.0,
   "stock": 15
 }

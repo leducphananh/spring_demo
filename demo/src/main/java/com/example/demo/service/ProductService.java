@@ -17,16 +17,18 @@ import com.example.demo.repository.ProductRepository;
 public class ProductService {
     private static final Logger log = LoggerFactory.getLogger(ProductService.class);
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     public ProductResponse createProduct(ProductRequest request) {
-        Product product = ProductMapper.toEntity(request);
+        Product product = productMapper.toEntity(request);
         Product savedProduct = productRepository.save(product);
         log.info("Create product successfully: {}", savedProduct);
-        return ProductMapper.toResponse(savedProduct);
+        return productMapper.toResponse(savedProduct);
     }
 
     public ProductResponse getProductById(Long id) {
@@ -34,28 +36,26 @@ public class ProductService {
         if (product == null) {
             throw new ResourceNotFoundException("Product", "id", id);
         }
-        return ProductMapper.toResponse(product);
+        return productMapper.toResponse(product);
     }
 
     public Page<ProductResponse> getProducts(String keyword, Pageable pageable) {
         if (keyword != null && !keyword.trim().isEmpty()) {
-            return productRepository.findByNameContainingIgnoreCase(keyword, pageable).map(ProductMapper::toResponse);
+            return productRepository.findByNameContainingIgnoreCase(keyword, pageable).map(productMapper::toResponse);
         }
-        return productRepository.findAll(pageable).map(ProductMapper::toResponse);
+        return productRepository.findAll(pageable).map(productMapper::toResponse);
     }
 
-    public Product updateProduct(Long id, Product product) {
+    public ProductResponse updateProduct(Long id, ProductRequest request) {
         Product existingProduct = productRepository.findById(id).orElse(null);
         if (existingProduct == null) {
             throw new ResourceNotFoundException("Product", "id", id);
         }
 
-        existingProduct.setName(product.getName());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setStock(product.getStock());
+        productMapper.updateProduct(request, existingProduct);
 
         log.info("Update product successfully: {}", existingProduct);
-        return productRepository.save(existingProduct);
+        return productMapper.toResponse(productRepository.save(existingProduct));
     }
 
     public boolean deleteProduct(Long id) {

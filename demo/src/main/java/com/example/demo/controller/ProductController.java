@@ -18,7 +18,6 @@ import com.example.demo.common.ApiResponse;
 import com.example.demo.common.ResponseUtil;
 import com.example.demo.dto.request.ProductRequest;
 import com.example.demo.dto.response.ProductResponse;
-import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 
 import jakarta.validation.Valid;
@@ -56,8 +55,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Product>> updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        Product updatedProduct = productService.updateProduct(id, product);
+    public ResponseEntity<ApiResponse<ProductResponse>> updateProduct(@PathVariable Long id,
+            @RequestBody ProductRequest request) {
+        ProductResponse updatedProduct = productService.updateProduct(id, request);
         return ResponseEntity.ok(ResponseUtil.success(updatedProduct, "Update product successfully"));
     }
 
