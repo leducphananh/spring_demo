@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import com.example.demo.repository.ProductRepository;
 
 @Service
 public class ProductService {
+    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
@@ -22,6 +25,7 @@ public class ProductService {
     public ProductResponse createProduct(ProductRequest request) {
         Product product = ProductMapper.toEntity(request);
         Product savedProduct = productRepository.save(product);
+        log.info("Create product successfully: {}", savedProduct);
         return ProductMapper.toResponse(savedProduct);
     }
 
@@ -49,6 +53,8 @@ public class ProductService {
         existingProduct.setName(product.getName());
         existingProduct.setPrice(product.getPrice());
         existingProduct.setStock(product.getStock());
+
+        log.info("Update product successfully: {}", existingProduct);
         return productRepository.save(existingProduct);
     }
 
@@ -59,6 +65,7 @@ public class ProductService {
         }
 
         productRepository.delete(existingProduct);
+        log.info("Delete product successfully: {}", existingProduct);
         return true;
     }
 }

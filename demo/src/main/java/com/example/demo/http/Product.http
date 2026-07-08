@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:8080
 
 ### Get products (with optional search and pagination)
-GET {{baseUrl}}/products?page=0&size=5&keyword=iphone
+GET {{baseUrl}}/products?page=0&size=5&keyword=laptop
 Accept: application/json
 
 ###
@@ -26,7 +26,7 @@ Accept: application/json
 ###
 
 ### Update a product
-PUT {{baseUrl}}/products/5
+PUT {{baseUrl}}/products/6
 Content-Type: application/json
 
 {
