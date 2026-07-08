@@ -33,9 +33,11 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody ProductRequest product) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(productService.createProduct(product));
+    public ResponseEntity<ApiResponse<ProductResponse>> createProduct(@Valid @RequestBody ProductRequest product) {
+        ProductResponse createdProduct = productService.createProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseUtil.success(
+                createdProduct,
+                "Create product successfully"));
     }
 
     @GetMapping("/{id}")
