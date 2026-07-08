@@ -42,21 +42,23 @@ public class ProductService {
 
     public Product updateProduct(Long id, Product product) {
         Product existingProduct = productRepository.findById(id).orElse(null);
-        if (existingProduct != null) {
-            existingProduct.setName(product.getName());
-            existingProduct.setPrice(product.getPrice());
-            existingProduct.setStock(product.getStock());
-            return productRepository.save(existingProduct);
+        if (existingProduct == null) {
+            throw new ResourceNotFoundException("Product", "id", id);
         }
-        return null;
+
+        existingProduct.setName(product.getName());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setStock(product.getStock());
+        return productRepository.save(existingProduct);
     }
 
     public boolean deleteProduct(Long id) {
         Product existingProduct = productRepository.findById(id).orElse(null);
-        if (existingProduct != null) {
-            productRepository.delete(existingProduct);
-            return true;
+        if (existingProduct == null) {
+            throw new ResourceNotFoundException("Product", "id", id);
         }
-        return false;
+
+        productRepository.delete(existingProduct);
+        return true;
     }
 }

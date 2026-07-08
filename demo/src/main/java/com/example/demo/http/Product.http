@@ -25,7 +25,7 @@ Accept: application/json
 ###
 
 ### Update a product
-PUT {{baseUrl}}/products/1
+PUT {{baseUrl}}/products/5
 Content-Type: application/json
 
 {
