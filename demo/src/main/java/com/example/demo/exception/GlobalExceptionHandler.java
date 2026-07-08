@@ -50,4 +50,19 @@ public class GlobalExceptionHandler {
         log.error("Invalid email or password exception: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseUtil.error(ex.getMessage(), null));
     }
+
+    @ExceptionHandler(io.jsonwebtoken.JwtException.class)
+    public ResponseEntity<ApiResponse<Void>> handleJwtException(io.jsonwebtoken.JwtException ex) {
+        log.error("JWT Error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(ResponseUtil.error(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleAuthenticationException(
+            org.springframework.security.core.AuthenticationException ex) {
+        log.error("Authentication Error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(ResponseUtil.error(ex.getMessage(), null));
+    }
 }

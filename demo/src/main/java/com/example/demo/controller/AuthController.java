@@ -21,24 +21,24 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthService authService;
+        private final AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<ApiResponse<RegisterResponse>> register(
-            @Valid @RequestBody RegisterRequest request) {
+        @PostMapping("/register")
+        public ResponseEntity<ApiResponse<RegisterResponse>> register(
+                        @Valid @RequestBody RegisterRequest request) {
 
-        return ResponseEntity.ok(
-                ResponseUtil.success(authService.register(request),
-                        "Register successfully"));
+                return ResponseEntity.ok(
+                                ResponseUtil.success(authService.register(request),
+                                                "Register successfully"));
 
-    }
+        }
 
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse<LoginResponse>> login(
-            @Valid @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(
-                ResponseUtil.success(authService.login(request),
-                        "Login successfully"));
-    }
+        @PostMapping("/login")
+        public ResponseEntity<ApiResponse<LoginResponse>> login(
+                        @Valid @RequestBody LoginRequest request) {
+                return ResponseEntity.ok(
+                                ResponseUtil.success(authService.login(request),
+                                                "Login successfully"));
 
+        }
 }

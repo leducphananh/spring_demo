@@ -17,6 +17,13 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "phananh@gmail.com1111",
+  "email": "phananh@gmail.com",
   "password":"123456"
 }
+
+###
+
+### Get Me
+GET {{baseUrl}}/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaGFuYW5oQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzgzNTI3MzQwLCJleHAiOjE3ODM1MzA5NDB9.VSivxHpGkme7NvEd4yceqWYItaksiXJ3sr0qIC4IPg0
+Content-Type: application/json
