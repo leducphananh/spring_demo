@@ -1,13 +1,16 @@
 package com.example.demo.service.impl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.request.RegisterRequest;
 import com.example.demo.dto.response.RegisterResponse;
 import com.example.demo.entity.User;
+import com.example.demo.exception.EmailAlreadyExistsException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AuthService;
 
+@Service
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
 
@@ -22,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
     public RegisterResponse register(RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new EmailAlreadyExistsException("Email already exists");
         }
 
         User user = User.builder()
