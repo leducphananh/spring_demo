@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
   "name": "Laptop Dell XPS",
-  "price": 1500.0,
+  "price": -1500.0,
   "stock": 10
 }
 

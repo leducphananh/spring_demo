@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,8 @@ import com.example.demo.dto.ProductResponse;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -27,8 +30,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductResponse createProduct(@RequestBody ProductRequest product) {
-        return productService.createProduct(product);
+    public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody ProductRequest product) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(productService.createProduct(product));
     }
 
     @GetMapping("/{id}")
