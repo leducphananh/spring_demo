@@ -4,8 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.ProductRequest;
-import com.example.demo.dto.ProductResponse;
+import com.example.demo.dto.request.ProductRequest;
+import com.example.demo.dto.response.ProductResponse;
 import com.example.demo.entity.Product;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.ProductMapper;

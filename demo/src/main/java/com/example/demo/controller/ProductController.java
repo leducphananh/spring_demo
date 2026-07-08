@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.ProductRequest;
-import com.example.demo.dto.ProductResponse;
+import com.example.demo.dto.request.ProductRequest;
+import com.example.demo.dto.response.ProductResponse;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 
