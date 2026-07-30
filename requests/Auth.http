@@ -1,11 +1,12 @@
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:8081
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaGFuYW5oQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzg1NDA3NzgzLCJleHAiOjE3ODU0MTEzODN9.3riyWh6p08eBXYbUqKf2YL4g4OE0JqAu1O4L0z5ugmY
 
 ### Register
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "fullName": "Phan Anh",
+  "fullName": "Admin",
   "email":"phananh@gmail.com",
   "password":"123456"
 }
@@ -25,5 +26,5 @@ Content-Type: application/json
 
 ### Get Me
 GET {{baseUrl}}/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaGFuYW5oQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzgzNTI3MzQwLCJleHAiOjE3ODM1MzA5NDB9.VSivxHpGkme7NvEd4yceqWYItaksiXJ3sr0qIC4IPg0
 Content-Type: application/json
+Authorization: Bearer {{token}}

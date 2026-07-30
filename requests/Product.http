@@ -1,14 +1,17 @@
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:8081
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaGFuYW5oQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzg1NDA3NzgzLCJleHAiOjE3ODU0MTEzODN9.3riyWh6p08eBXYbUqKf2YL4g4OE0JqAu1O4L0z5ugmY
 
 ### Get products (with optional search and pagination)
 GET {{baseUrl}}/products?page=0&size=5&keyword=laptop
 Accept: application/json
+Authorization: Bearer {{token}}
 
 ###
 
 ### Create a new product
 POST {{baseUrl}}/products
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Laptop Dell XPS",
@@ -22,12 +25,14 @@ Content-Type: application/json
 ### Get a product by ID
 GET {{baseUrl}}/products/5
 Accept: application/json
+Authorization: Bearer {{token}}
 
 ###
 
 ### Update a product
 PUT {{baseUrl}}/products/6
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Laptop Dell XPS 12",
