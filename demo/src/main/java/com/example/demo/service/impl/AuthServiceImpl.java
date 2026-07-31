@@ -15,6 +15,7 @@ import com.example.demo.property.JwtProperties;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AuthService;
 import com.example.demo.service.JwtService;
+import com.example.demo.service.NotificationService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -26,12 +27,15 @@ public class AuthServiceImpl implements AuthService {
 
     private final JwtService jwtService;
 
+    private final NotificationService notificationService;
+
     public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService,
-            JwtProperties jwtProperties) {
+            JwtProperties jwtProperties, NotificationService notificationService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.jwtProperties = jwtProperties;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -50,6 +54,8 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
+
+        notificationService.sendWelcomeEmail(user.getEmail());
 
         return RegisterResponse.builder()
                 .id(user.getId())
